@@ -3,12 +3,15 @@
 
 int main(void)
 {
-  //Variables declared
-  char board[6][7];
-
-  //Functions being tested
+  Cell board[BOARD_COLS][BOARD_ROWS];
   init_board(board);
   print_board(board);
-
-  return 0;
+  play_turn(board, PLAYER_ONE);
+  play_turn(board, PLAYER_TWO);
+  play_turn(board, PLAYER_ONE);
+  play_turn(board, PLAYER_TWO);
+  play_turn(board, PLAYER_ONE);
+  play_turn(board, PLAYER_TWO);
+  play_turn(board, PLAYER_ONE);
+  play_turn(board, PLAYER_TWO);
 }
