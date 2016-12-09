@@ -137,163 +137,119 @@ int is_on_board(int row, int col)
 int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
 {
   //Scores player 1 diagonals
-  if (player_number == PLAYER_ONE)
+  int r = row, c = col, counter = 0;
+
+  //Checks up and right
+  while(is_on_board(r-1, c+1))
   {
-    int r = row, c = col, counter = 0;
-
-    //Checks up and right
-    while(is_on_board(r-1, c+1))
+    r -= 1;
+    c += 1;
+    if (player_number == PLAYER_ONE)
     {
-      r -= 1;
-      c += 1;
       if (board[r][c].token == 'X')
       {
         counter += 1;
       }
-      //printf("UR Row: %d Col: %d\n", r, c);
     }
-    //printf("UR counter: %d\n", counter);
-
-    //Checks down and left
-    r = row;
-    c = col;
-    while(is_on_board(r+1, c-1))
+    else if (player_number == PLAYER_TWO)
     {
-      r += 1;
-      c -= 1;
+      if (board[r][c].token == 'O')
+      {
+        counter += 1;
+      }
+    }
+    //printf("UR Row: %d Col: %d\n", r, c);
+  }
+  //printf("UR counter: %d\n", counter);
+
+  //Checks down and left
+  r = row;
+  c = col;
+  while(is_on_board(r+1, c-1))
+  {
+    r += 1;
+    c -= 1;
+    if (player_number == PLAYER_ONE)
+    {
       if (board[r][c].token == 'X')
       {
         counter += 1;
       }
-      //printf("DL Row: %d Col: %d\n", r, c);
     }
-    //printf("DL counter: %d\n", counter);
-    if (counter >= 3)
+    else if (player_number == PLAYER_TWO)
     {
-      return 1;
-    }
-
-    //Checks down and right
-    r = row;
-    c = col;
-    counter = 0;
-    while(is_on_board(r+1, c+1))
-    {
-      r += 1;
-      c += 1;
-      if (board[r][c].token == 'X')
+      if (board[r][c].token == 'O')
       {
         counter += 1;
       }
-      //printf("DR Row: %d Col: %d\n", r, c);
     }
-    //printf("DR counter: %d\n", counter);
-
-    //Checks up and left
-    r = row;
-    c = col;
-    while(is_on_board(r-1, c-1))
-    {
-      r -= 1;
-      c -= 1;
-      if (board[r][c].token == 'X')
-      {
-        counter += 1;
-      }
-      //printf("UL Row: %d Col: %d\n", r, c);
-    }
-    //printf("UL counter: %d\n", counter);
-
-    if (counter >= 3)
-    {
-      return 1;
-    }
-    else
-    {
-      return 0;
-    }
-
+    //printf("DL Row: %d Col: %d\n", r, c);
+  }
+  //printf("DL counter: %d\n", counter);
+  if (counter >= 3)
+  {
+    return 1;
   }
 
-  //Scores player 2 diagonals
-  if (player_number == PLAYER_TWO)
+  //Checks down and right
+  r = row;
+  c = col;
+  counter = 0;
+  while(is_on_board(r+1, c+1))
   {
-    int r = row, c = col, counter = 0;
-
-    //Checks up and right
-    while(is_on_board(r-1, c+1))
+    r += 1;
+    c += 1;
+    if (player_number == PLAYER_ONE)
     {
-      r -= 1;
-      c += 1;
+      if (board[r][c].token == 'X')
+      {
+        counter += 1;
+      }
+    }
+    else if (player_number == PLAYER_TWO)
+    {
       if (board[r][c].token == 'O')
       {
         counter += 1;
       }
-      //printf("UR Row: %d Col: %d\n", r, c);
     }
-    //printf("UR counter: %d\n", counter);
-
-    //Checks down and left
-    r = row;
-    c = col;
-    while(is_on_board(r+1, c-1))
-    {
-      r += 1;
-      c -= 1;
-      if (board[r][c].token == 'O')
-      {
-        counter += 1;
-      }
-      //printf("DL Row: %d Col: %d\n", r, c);
-    }
-    //printf("DL counter: %d\n", counter);
-    if (counter >= 3)
-    {
-      return 1;
-    }
-
-    //Checks down and right
-    r = row;
-    c = col;
-    counter = 0;
-    while(is_on_board(r+1, c+1))
-    {
-      r += 1;
-      c += 1;
-      if (board[r][c].token == 'O')
-      {
-        counter += 1;
-      }
-      //printf("DR Row: %d Col: %d\n", r, c);
-    }
-    //printf("DR counter: %d\n", counter);
-
-    //Checks up and left
-    r = row;
-    c = col;
-    while(is_on_board(r-1, c-1))
-    {
-      r -= 1;
-      c -= 1;
-      if (board[r][c].token == 'O')
-      {
-        counter += 1;
-      }
-      //printf("UL Row: %d Col: %d\n", r, c);
-    }
-    //printf("UL counter: %d\n", counter);
-
-    if (counter >= 3)
-    {
-      return 1;
-    }
-    else
-    {
-      return 0;
-    }
-
+    //printf("DR Row: %d Col: %d\n", r, c);
   }
-  return 0;
+  //printf("DR counter: %d\n", counter);
+
+  //Checks up and left
+  r = row;
+  c = col;
+  while(is_on_board(r-1, c-1))
+  {
+    r -= 1;
+    c -= 1;
+    if (player_number == PLAYER_ONE)
+    {
+      if (board[r][c].token == 'X')
+      {
+        counter += 1;
+      }
+    }
+    else if (player_number == PLAYER_TWO)
+    {
+      if (board[r][c].token == 'O')
+      {
+        counter += 1;
+      }
+    }
+    //printf("UL Row: %d Col: %d\n", r, c);
+  }
+  //printf("UL counter: %d\n", counter);
+
+  if (counter >= 3)
+  {
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 
