@@ -3,15 +3,14 @@
 
 int main(void)
 {
-  Cell board[BOARD_COLS][BOARD_ROWS];
+  Cell board[7][8];
   init_board(board);
   print_board(board);
-  play_turn(board, PLAYER_ONE);
-  play_turn(board, PLAYER_TWO);
-  play_turn(board, PLAYER_ONE);
-  play_turn(board, PLAYER_TWO);
-  play_turn(board, PLAYER_ONE);
-  play_turn(board, PLAYER_TWO);
-  play_turn(board, PLAYER_ONE);
-  play_turn(board, PLAYER_TWO);
+  while (!is_full(board))
+  {
+    play_turn(board, PLAYER_ONE);
+    play_turn(board, PLAYER_TWO);
+  }
+
+  return 0;
 }

@@ -24,16 +24,20 @@ typedef struct cell
 }Cell;
 
 //Function that initializes the game board
-void init_board(Cell board[][BOARD_ROWS]);
+void init_board(Cell board[][8]);
 
 //Function that prints the game board
-void print_board(Cell board[][BOARD_ROWS]);
+void print_board(Cell board[][8]);
 
 //Function that determines if a column is available
 //Returns 1 for open, 0 for full
-int check_col(Cell board[][BOARD_ROWS], int column);
+int check_col(Cell board[][8], int column);
+
+//Function that checks if the board is full
+//Returns 1 for full, 0 for open
+int is_full(Cell board[][8]);
 
 //Function that allows a player to make a move
-void play_turn(Cell board[][BOARD_ROWS], int player_number);
+void play_turn(Cell board[][8], int player_number);
 
 #endif
