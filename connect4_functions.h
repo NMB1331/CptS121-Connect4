@@ -38,6 +38,14 @@ int check_col(Cell board[][8], int column);
 int is_full(Cell board[][8]);
 
 //Function that allows a player to make a move
-void play_turn(Cell board[][8], int player_number);
+void play_turn(Cell board[][8], int player_number, int *row, int *col);
+
+//Function that checks if coordinates are on the board
+//Returns 1 if on the board, 0 otherwise
+int is_on_board(int row, int col);
+
+//Function that checks for a win diagonally
+//Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
+int check_diagonal_win(Cell board[][8], int player_number, int row, int col);
 
 #endif
