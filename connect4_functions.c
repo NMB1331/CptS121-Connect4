@@ -252,6 +252,90 @@ int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
   }
 }
 
+//Function that checks for horizontal win
+//Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
+int check_vertical_win(Cell board[][8], int player_number, int col)
+{
+  int counter = 0;
+  for (int i=1; i<7; i++)
+  {
+    //Checks the row of the last move for player 1
+    if (player_number == PLAYER_ONE)
+    {
+      if (board[i][col].token == 'X')
+      {
+        counter += 1;
+      }
+    }
+    //Checks the row of the last move for player 1
+    if (player_number == PLAYER_TWO)
+    {
+      if (board[i][col].token == 'O')
+      {
+        counter += 1;
+      }
+    }
+
+  }
+  if (counter >= 4)
+  {
+    return player_number;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+//Function that checks for vertical win
+//Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
+int check_horiz_win(Cell board[][8], int player_number, int row)
+{
+  int counter = 0;
+  for (int i=1; i<8; i++)
+  {
+    //Checks the column of the last move for player 1
+    if (player_number == PLAYER_ONE)
+    {
+      if (board[row][i].token == 'X')
+      {
+        counter += 1;
+      }
+    }
+    //Checks the column of the last move for player 1
+    if (player_number == PLAYER_TWO)
+    {
+      if (board[row][i].token == 'O')
+      {
+        counter += 1;
+      }
+    }
+
+  }
+  if (counter >= 4)
+  {
+    return player_number;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+//Function that checks for a win
+//Returns 1 if P1 wins, 2 if P2 wins, 0 otherwise
+int check_win(Cell board[][8], int player_number, int row, int col)
+{
+  if (check_diagonal_win(board, player_number, row, col) || check_horiz_win(board, player_number, row) || check_vertical_win(board, player_number, col))
+  {
+    return player_number;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
 
 //
 //

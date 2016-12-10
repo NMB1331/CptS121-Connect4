@@ -48,4 +48,16 @@ int is_on_board(int row, int col);
 //Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
 int check_diagonal_win(Cell board[][8], int player_number, int row, int col);
 
+//Function that checks for horizontal win
+//Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
+int check_horiz_win(Cell board[][8], int player_number, int row);
+
+//Function that checks for vertical win
+//Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
+int check_vertical_win(Cell board[][8], int player_number, int col);
+
+//Function that checks for a win
+//Returns 1 if P1 wins, 2 if P2 wins, 0 otherwise
+int check_win(Cell board[][8], int player_number, int row, int col);
+
 #endif
