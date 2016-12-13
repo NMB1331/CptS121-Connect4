@@ -112,7 +112,7 @@ int is_full(Cell board[][8])
   int counter = 0;
   for (int i=1; i<8; i++)
   {
-    if (!check_col(board, i))
+    if (!check_col(board, i)) //Checks if every column is full
     {
       counter += 1;
     }
@@ -199,7 +199,7 @@ int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
   //Scores player 1 diagonals
   int r = row, c = col, counter = 0;
 
-  //Checks up and right
+  //Checks up and right of last move
   while(is_on_board(r-1, c+1))
   {
     r -= 1;
@@ -246,7 +246,7 @@ int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
     //printf("DL Row: %d Col: %d\n", r, c);
   }
   //printf("DL counter: %d\n", counter);
-  if (counter >= 3)
+  if (counter >= 3) //3 because it doesn't count the original
   {
     return 1;
   }

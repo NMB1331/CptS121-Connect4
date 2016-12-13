@@ -1,6 +1,6 @@
 /*
 NATHANIEL BURLEY
-WASHINGTON STATE UNIVERSITY 
+WASHINGTON STATE UNIVERSITY
 COMPUTER SCIENCE 121
 */
 
@@ -15,7 +15,7 @@ int three_in_row_vert(Cell board[][8])
     int counter = 0;
     for (int row=6; row>0; row--)
     {
-      if (counter == 3)
+      if (counter == 2)
       {
         if (board[row][col].token == 'O')
         {
@@ -52,7 +52,7 @@ int three_in_row_horiz(Cell board[][8])
     int counter = 0;
     for (int col=1; col<8; col++)
     {
-      if (counter == 3)
+      if (counter == 2)
       {
         if (board[row][col].token == 'O')
         {
@@ -84,7 +84,7 @@ int three_in_row_horiz(Cell board[][8])
     int counter = 0;
     for (int col=7; col>0; col--)
     {
-      if (counter == 3)
+      if (counter == 2)
       {
         if (board[row][col].token == 'O')
         {
