@@ -7,4 +7,4 @@ dropping colored discs from the top into a seven-column, six-row vertically susp
 occupying the next available space within the column. The goal of the game is to try to be the first player to get four pieces
 of the same color in a row.
 
-Basically, this program lets 2 players play Connect Four.
+Basically, this program lets 2 players (either human versus human, or human versus computer) play Connect 4
