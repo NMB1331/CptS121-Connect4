@@ -1,3 +1,9 @@
+/*
+NATHANIEL BURLEY
+WASHINGTON STATE UNIVERSITY
+COMPUTER SCIENCE 121
+*/
+
 #include "connect4_functions.h"
 
 //Function that prints the game rules

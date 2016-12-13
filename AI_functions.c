@@ -1,3 +1,9 @@
+/*
+NATHANIEL BURLEY
+WASHINGTON STATE UNIVERSITY 
+COMPUTER SCIENCE 121
+*/
+
 #include "AI_functions.h"
 
 //Function that checks for three X's in a row vertically

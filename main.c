@@ -1,3 +1,9 @@
+/*
+NATHANIEL BURLEY
+WASHINGTON STATE UNIVERSITY
+COMPUTER SCIENCE 121
+*/
+
 #include "connect4_functions.h"
 #include "AI_functions.h"
 #include "connect4_functions.c"
