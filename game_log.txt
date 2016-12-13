@@ -1,7 +1,0 @@
-Player 1 Move 1: (6,1)
-Player 2 Move 1: (6,2)
-Player 1 Move 2: (5,1)
-Player 2 Move 2: (5,2)
-Player 1 Move 3: (4,1)
-Player 2 Move 3: (4,2)
-Player 1 Move 4: (3,1)

@@ -29,8 +29,8 @@ void init_board(Cell board[][8])
     for (int j=0; j<8; j++)
     {
       board[i][j].token = '_';
-      board[i][j].place.row = j;
-      board[i][j].place.col = i;
+      board[i][j].place.col = j;
+      board[i][j].place.row = i;
     }
 
   }
@@ -62,9 +62,9 @@ int friend_or_AI(void)
     printf("Want to play with a friend, or a digital Husky?\n");
     printf("Enter 'friend' for a buddy, or  'computer' for the Husky: ");
     scanf("%s", answer); //I was having problems with fgets...alas, no time to debug
-    printf("ANSWER: %s\n", answer);
-    printf("STRCMP 'computer': %d\n", strcmp(answer, "computer"));
-    printf("STRCMP 'friend': %d\n", strcmp(answer, "computer"));
+    //printf("ANSWER: %s\n", answer);
+    //printf("STRCMP 'computer': %d\n", strcmp(answer, "computer"));
+    //printf("STRCMP 'friend': %d\n", strcmp(answer, "computer"));
 
   } while((strcmp(answer, "friend") != 0 )&& (strcmp(answer, "computer") != 0));
   if (strcmp("computer", answer) == 0)
@@ -166,31 +166,6 @@ void play_turn(Cell board[][8], int player_number, int *row, int *col)
 
     }
 
-  }
-  print_board(board);
-}
-
-//Function that plays a turn for the computer
-void play_computer_turn(Cell board[][8], int player_number, int *row, int *col)
-{
-  int comp_col = 0;
-  //Randomly selects a column
-  do
-  {
-    comp_col = rand() % 8 + 1;
-  } while(!check_col(board, comp_col));
-  printf("COMPUTER CHOOSES %d\n", comp_col);
-
-  //Simulates token drop on board
-  for (int i=6; i>=1; i--)//-1
-  {
-    if (board[i][comp_col].token == '_')
-    {
-      *row = i;
-      *col = comp_col;
-      board[i][comp_col].token = 'O';
-      break;
-    }
   }
   print_board(board);
 }
@@ -414,7 +389,7 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
       }
     }
   }
-  if (counter >= 3)
+  if (counter >= 4)
   {
     return player_number;
   }

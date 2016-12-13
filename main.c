@@ -1,5 +1,7 @@
 #include "connect4_functions.h"
+#include "AI_functions.h"
 #include "connect4_functions.c"
+#include "AI_functions.c"
 
 /*NOTES
 -add number guess to determine who is player 1 (get names)

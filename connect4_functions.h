@@ -47,8 +47,7 @@ int is_full(Cell board[][8]);
 //Function that allows a player to make a move
 void play_turn(Cell board[][8], int player_number, int *row, int *col);
 
-//Function that plays a turn for the computer
-void play_computer_turn(Cell board[][8], int player_number, int *row, int *col);
+
 
 //Function that checks if coordinates are on the board
 //Returns 1 if on the board, 0 otherwise
