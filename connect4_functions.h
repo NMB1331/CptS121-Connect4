@@ -6,8 +6,8 @@
 #include <string.h>
 #include <time.h>
 
-#define BOARD_COLS 7
-#define BOARD_ROWS 6
+#define BOARD_COLS 8 //One greater than actual board to use index of 1
+#define BOARD_ROWS 7 //One greater than actual board to use index of 1
 #define PLAYER_ONE 1
 #define PLAYER_TWO 2
 
@@ -22,6 +22,9 @@ typedef struct cell
   char token;
   Location place;
 }Cell;
+
+//Function that prints the game rules
+void print_game_rules(void);
 
 //Function that initializes the game board
 void init_board(Cell board[][8]);

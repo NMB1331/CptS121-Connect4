@@ -1,5 +1,26 @@
 #include "connect4_functions.h"
 
+//Function that prints the game rules
+void print_game_rules(void)
+{
+  //Prints the directions to the screen
+  printf("Welcome to Connect Four!\n");
+  printf("This is a simple game, so...yay\n");
+  printf("All you gotta do is pick column to drop a token in and the game will\n");
+  printf("simulate it falling to the bottom of the board.\n");
+  printf("You just need to get four pieces in a row vertically, horizontally, or\n");
+  printf("diagonally before your opponent does. \n\nLike I said. Simple.\n\n");
+  printf("Have no friends? Not a problem! You have the option to play with a bud,\n");
+  printf("or play against the...genius AI.\n");
+  printf("Okay, the AI isn't a genius. It's more like a UW grad...which, suffice\n");
+  printf("to say, is not very smart. But hey, it's not my fault you're all alone.\n");
+  printf("Okay! Bullshitting complete. Lets play the game!\n");
+
+  //Clears the screen
+  system( "read -n 1 -s -p \"Press any key to continue...\"" );
+  system("clear");
+}
+
 //Function that initializes the game board (one extra space to avoid 0 based cols)
 void init_board(Cell board[][8])
 {
@@ -19,6 +40,7 @@ void init_board(Cell board[][8])
 //Function that prints the game board
 void print_board(Cell board[][8])
 {
+  puts("1 2 3 4 5 6 7");
   for (int i=1; i<7; i++)
   {
     for (int j=1; j<8; j++)
@@ -262,17 +284,25 @@ int check_vertical_win(Cell board[][8], int player_number, int col)
     //Checks the row of the last move for player 1
     if (player_number == PLAYER_ONE)
     {
-      if (board[i][col].token == 'X')
+      if (board[i][col].token == 'X') //Counts num X's in a row (vertically)
       {
         counter += 1;
+      }
+      else                            //Zeroes out if not X
+      {
+        counter = 0;
       }
     }
     //Checks the row of the last move for player 1
     if (player_number == PLAYER_TWO)
     {
-      if (board[i][col].token == 'O')
+      if (board[i][col].token == 'O') //Counts num O's in a row (vertically)
       {
         counter += 1;
+      }
+      else                            ////Zeroes out if not O
+      {
+        counter = 0;
       }
     }
 
@@ -297,17 +327,25 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
     //Checks the column of the last move for player 1
     if (player_number == PLAYER_ONE)
     {
-      if (board[row][i].token == 'X')
+      if (board[row][i].token == 'X') //Counts num X's in a row (horizontally)
       {
         counter += 1;
+      }
+      else                            //Zeroes out if O
+      {
+        counter = 0;
       }
     }
     //Checks the column of the last move for player 1
     if (player_number == PLAYER_TWO)
     {
-      if (board[row][i].token == 'O')
+      if (board[row][i].token == 'O') //Counts num O's in a row (horizontally)
       {
         counter += 1;
+      }
+      else                            //Zeroes out if X
+      {
+        counter = 0;
       }
     }
 
