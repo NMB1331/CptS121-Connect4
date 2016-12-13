@@ -11,8 +11,6 @@ COMPUTER SCIENCE 121
 
 /*NOTES
 -add number guess to determine who is player 1 (get names)
--add an option for single player (either random...or some AI?)
--possibly at some stats?
 -clean up comments, remove "magic numbers"
 */
 
