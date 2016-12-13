@@ -52,11 +52,43 @@ void print_board(Cell board[][8])
   printf("\n");
 }
 
+//Function that prompts the user for how many players
+int friend_or_AI(void)
+{
+  char answer[20];
+  do
+  {
+    //system("clear");
+    printf("Want to play with a friend, or a digital Husky?\n");
+    printf("Enter 'friend' for a buddy, or  'computer' for the Husky: ");
+    scanf("%s", answer); //I was having problems with fgets...alas, no time to debug
+    printf("ANSWER: %s\n", answer);
+    printf("STRCMP 'computer': %d\n", strcmp(answer, "computer"));
+    printf("STRCMP 'friend': %d\n", strcmp(answer, "computer"));
+
+  } while((strcmp(answer, "friend") != 0 )&& (strcmp(answer, "computer") != 0));
+  if (strcmp("computer", answer) == 0)
+  {
+    printf("Ah, the Husky! Good luck...\n");
+    return PLAYER_THREE;
+  }
+  else
+  {
+    printf("A friend! Excellent! Good luck...\n");
+    return PLAYER_TWO;
+  }
+}
+
 //Function that determines if a column is available
 //Returns 1 for open, 0 for full
 int check_col(Cell board[][8], int column)
 {
-  for (int i=7; i>=1; i--)
+  if (column > 7 || column < 1) //Ensures choice is on the board
+  {
+    return 0;
+  }
+
+  for (int i=7; i>=1; i--) //Makes sure there's a space open
   {
     if (board[i][column].token == '_')
     {
@@ -134,6 +166,31 @@ void play_turn(Cell board[][8], int player_number, int *row, int *col)
 
     }
 
+  }
+  print_board(board);
+}
+
+//Function that plays a turn for the computer
+void play_computer_turn(Cell board[][8], int player_number, int *row, int *col)
+{
+  int comp_col = 0;
+  //Randomly selects a column
+  do
+  {
+    comp_col = rand() % 8 + 1;
+  } while(!check_col(board, comp_col));
+  printf("COMPUTER CHOOSES %d\n", comp_col);
+
+  //Simulates token drop on board
+  for (int i=6; i>=1; i--)//-1
+  {
+    if (board[i][comp_col].token == '_')
+    {
+      *row = i;
+      *col = comp_col;
+      board[i][comp_col].token = 'O';
+      break;
+    }
   }
   print_board(board);
 }
@@ -327,6 +384,10 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
     //Checks the column of the last move for player 1
     if (player_number == PLAYER_ONE)
     {
+      if (counter == 4)
+      {
+        break;
+      }
       if (board[row][i].token == 'X') //Counts num X's in a row (horizontally)
       {
         counter += 1;
@@ -339,6 +400,10 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
     //Checks the column of the last move for player 1
     if (player_number == PLAYER_TWO)
     {
+      if (counter == 4)
+      {
+        break;
+      }
       if (board[row][i].token == 'O') //Counts num O's in a row (horizontally)
       {
         counter += 1;
@@ -348,9 +413,8 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
         counter = 0;
       }
     }
-
   }
-  if (counter >= 4)
+  if (counter >= 3)
   {
     return player_number;
   }

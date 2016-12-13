@@ -10,8 +10,9 @@
 
 int main(void)
 {
+  srand((unsigned int) (time NULL));
   int p1_last_row = 1, p1_last_col = 1, p1_move_counter = 0;
-  int p2_last_row = 1, p2_last_col = 1, p2_move_counter = 0;
+  int opp_last_row = 1, opp_last_col = 1, opp_move_counter = 0;
   Cell board[7][8];
   FILE *game_log = NULL;
 
@@ -20,8 +21,10 @@ int main(void)
 
   //Main body of the game
   print_game_rules();
+  int opponent_choice = friend_or_AI();
   while (!is_full(board))
   {
+    //PLAYS AND SCORES PLAYER 1
     print_board(board);
     play_turn(board, PLAYER_ONE, &p1_last_row, &p1_last_col);
     p1_move_counter++;
@@ -36,14 +39,22 @@ int main(void)
       break;
     }
 
-    play_turn(board, PLAYER_TWO, &p2_last_row, &p2_last_col);
-    p2_move_counter++;
+    //PLAYS AND SCORES OPPONENT
+    if (opponent_choice == PLAYER_TWO)
+    {
+      play_turn(board, PLAYER_TWO, &opp_last_row, &opp_last_col);
+    }
+    else
+    {
+      play_computer_turn(board, PLAYER_THREE, &opp_last_row, &opp_last_col);
+    }
+    opp_move_counter++;
     //Writes move to the game log
-    fprintf(game_log, "Player 2 Move %d: (%d,%d)\n", p2_move_counter, p2_last_row, p2_last_col);
-    if (check_win(board, PLAYER_TWO, p2_last_row, p2_last_col))
+    fprintf(game_log, "Player 2 Move %d: (%d,%d)\n", opp_move_counter, opp_last_row, opp_last_col);
+    if (check_win(board, PLAYER_TWO, opp_last_row, opp_last_col)) //Works with computer as opponent, too
     {
       printf("PLAYER 2 WINS!!!\n");
-      printf("It took %d moves\n", p2_move_counter);
+      printf("It took %d moves\n", opp_move_counter);
       system( "read -n 1 -s -p \"Press any key to continue...\"" );
       system("clear");
       break;

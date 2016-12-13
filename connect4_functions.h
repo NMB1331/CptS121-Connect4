@@ -10,6 +10,7 @@
 #define BOARD_ROWS 7 //One greater than actual board to use index of 1
 #define PLAYER_ONE 1
 #define PLAYER_TWO 2
+#define PLAYER_THREE 3 //The computer shall be player 3 in the code
 
 typedef struct location
 {
@@ -32,6 +33,9 @@ void init_board(Cell board[][8]);
 //Function that prints the game board
 void print_board(Cell board[][8]);
 
+//Function that prompts the user for how many players
+int friend_or_AI(void);
+
 //Function that determines if a column is available
 //Returns 1 for open, 0 for full
 int check_col(Cell board[][8], int column);
@@ -42,6 +46,9 @@ int is_full(Cell board[][8]);
 
 //Function that allows a player to make a move
 void play_turn(Cell board[][8], int player_number, int *row, int *col);
+
+//Function that plays a turn for the computer
+void play_computer_turn(Cell board[][8], int player_number, int *row, int *col);
 
 //Function that checks if coordinates are on the board
 //Returns 1 if on the board, 0 otherwise
