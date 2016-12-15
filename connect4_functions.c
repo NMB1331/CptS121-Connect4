@@ -28,11 +28,11 @@ void print_game_rules(void)
 }
 
 //Function that initializes the game board (one extra space to avoid 0 based cols)
-void init_board(Cell board[][8])
+void init_board(Cell board[][BOARD_COLS])
 {
-  for (int i=0; i<7; i++)
+  for (int i=0; i<BOARD_ROWS+1; i++)
   {
-    for (int j=0; j<8; j++)
+    for (int j=0; j<BOARD_COLS; j++)
     {
       board[i][j].token = '_';
       board[i][j].place.col = j;
@@ -44,12 +44,12 @@ void init_board(Cell board[][8])
 }
 
 //Function that prints the game board
-void print_board(Cell board[][8])
+void print_board(Cell board[][BOARD_COLS])
 {
   puts("1 2 3 4 5 6 7");
-  for (int i=1; i<7; i++)
+  for (int i=1; i<BOARD_ROWS+1; i++)
   {
-    for (int j=1; j<8; j++)
+    for (int j=1; j<BOARD_COLS; j++)
     {
       printf("%c ", board[i][j].token);
     }
@@ -87,14 +87,14 @@ int friend_or_AI(void)
 
 //Function that determines if a column is available
 //Returns 1 for open, 0 for full
-int check_col(Cell board[][8], int column)
+int check_col(Cell board[][BOARD_COLS], int column)
 {
-  if (column > 7 || column < 1) //Ensures choice is on the board
+  if (column > BOARD_ROWS+1 || column < 1) //Ensures choice is on the board
   {
     return 0;
   }
 
-  for (int i=7; i>=1; i--) //Makes sure there's a space open
+  for (int i=BOARD_COLS-1; i>0; i--) //Makes sure there's a space open
   {
     if (board[i][column].token == '_')
     {
@@ -107,10 +107,10 @@ int check_col(Cell board[][8], int column)
 
 //Function that determines if a column is available
 //Returns 0 for open, 1 for full
-int is_full(Cell board[][8])
+int is_full(Cell board[][BOARD_COLS])
 {
   int counter = 0;
-  for (int i=1; i<8; i++)
+  for (int i=1; i<BOARD_COLS; i++)
   {
     if (!check_col(board, i)) //Checks if every column is full
     {
@@ -119,7 +119,7 @@ int is_full(Cell board[][8])
 
   }
 
-  if (counter == 7)
+  if (counter == BOARD_COLS-1)
   {
     return 1;
   }
@@ -130,7 +130,7 @@ int is_full(Cell board[][8])
 }
 
 //Function that allows a player to make a move
-void play_turn(Cell board[][8], int player_number, int *row, int *col)
+void play_turn(Cell board[][BOARD_COLS], int player_number, int *row, int *col)
 {
   //Gets column choice from the user
   int col_choice = 9;
@@ -138,13 +138,13 @@ void play_turn(Cell board[][8], int player_number, int *row, int *col)
   do
   {
     printf("Enter a choice of column: ");
-    scanf("%d", &col_choice);
-  } while(col_choice < 1 || col_choice > 7 || !check_col(board, col_choice));
+    scanf(" %d", &col_choice);
+  } while(col_choice < 1 || col_choice > BOARD_COLS-1 || !check_col(board, col_choice));
 
   //Drops player one token (X)
   if (player_number == PLAYER_ONE)
   {
-    for (int i=6; i>=1; i--)//-1
+    for (int i=BOARD_ROWS; i>=1; i--)//-1
     {
       if (board[i][col_choice].token == '_')
       {
@@ -160,7 +160,7 @@ void play_turn(Cell board[][8], int player_number, int *row, int *col)
   //Drops player two token (O)
   else if (player_number == PLAYER_TWO)
   {
-    for (int i=6; i>=1; i--)//-1
+    for (int i=BOARD_ROWS; i>=1; i--)//-1
     {
       if (board[i][col_choice].token == '_')
       {
@@ -180,7 +180,7 @@ void play_turn(Cell board[][8], int player_number, int *row, int *col)
 //Returns 1 if on the board, 0 otherwise
 int is_on_board(int row, int col)
 {
-  if (row <= 0 || row >= 7 || col <= 0 || col >= 8)
+  if (row <= 0 || row >= BOARD_ROWS+1 || col <= 0 || col >= BOARD_COLS)
   {
     //printf("OFF\n");
     return 0;
@@ -194,7 +194,7 @@ int is_on_board(int row, int col)
 
 //Function that checks for a win diagonally
 //Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
-int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
+int check_diagonal_win(Cell board[][BOARD_COLS], int player_number, int row, int col)
 {
   //Scores player 1 diagonals
   int r = row, c = col, counter = 0;
@@ -314,10 +314,10 @@ int check_diagonal_win(Cell board[][8], int player_number, int row, int col)
 
 //Function that checks for horizontal win
 //Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
-int check_vertical_win(Cell board[][8], int player_number, int col)
+int check_vertical_win(Cell board[][BOARD_COLS], int player_number, int col)
 {
   int counter = 0;
-  for (int i=1; i<7; i++)
+  for (int i=1; i<BOARD_COLS-1; i++)
   {
     //Checks the row of the last move for player 1
     if (player_number == PLAYER_ONE)
@@ -357,10 +357,10 @@ int check_vertical_win(Cell board[][8], int player_number, int col)
 
 //Function that checks for vertical win
 //Returns 1 if  P1 win, 2 if P2 win, 0 otherwise
-int check_horiz_win(Cell board[][8], int player_number, int row)
+int check_horiz_win(Cell board[][BOARD_COLS], int player_number, int row)
 {
   int counter = 0;
-  for (int i=1; i<8; i++)
+  for (int i=1; i<BOARD_COLS; i++)
   {
     //Checks the column of the last move for player 1
     if (player_number == PLAYER_ONE)
@@ -407,7 +407,7 @@ int check_horiz_win(Cell board[][8], int player_number, int row)
 
 //Function that checks for a win
 //Returns 1 if P1 wins, 2 if P2 wins, 0 otherwise
-int check_win(Cell board[][8], int player_number, int row, int col)
+int check_win(Cell board[][BOARD_COLS], int player_number, int row, int col)
 {
   if (check_diagonal_win(board, player_number, row, col) || check_horiz_win(board, player_number, row) || check_vertical_win(board, player_number, col))
   {
