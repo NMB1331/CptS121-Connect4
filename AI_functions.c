@@ -8,12 +8,12 @@ COMPUTER SCIENCE 121
 
 //Function that checks for three X's in a row vertically
 //Returns the column if three in a row, 0 otherwise
-int three_in_row_vert(Cell board[][8])
+int three_in_row_vert(Cell board[][BOARD_COLS])
 {
-  for (int col=1; col<8; col++)
+  for (int col=1; col<BOARD_COLS; col++)
   {
     int counter = 0;
-    for (int row=6; row>0; row--)
+    for (int row=BOARD_ROWS; row>0; row--)
     {
       if (counter == 2)
       {
@@ -44,14 +44,20 @@ int three_in_row_vert(Cell board[][8])
 
 //Function that checks for three X's in a row horizontally
 //Returns the column open if three in a row with space open, 0 otherwise
-int three_in_row_horiz(Cell board[][8])
+int three_in_row_horiz(Cell board[][BOARD_COLS])
 {
   //Checks...going right?
-  for (int row=6; row>0; row--)
+  for (int row=BOARD_ROWS; row>0; row--)
   {
     int counter = 0;
-    for (int col=1; col<8; col++)
+    for (int col=1; col<BOARD_COLS; col++)
     {
+      if (counter == 1)
+      {
+        /*
+        if (board[row][col].token == '')
+        */
+      }
       if (counter == 2)
       {
         if (board[row][col].token == 'O')
@@ -79,7 +85,7 @@ int three_in_row_horiz(Cell board[][8])
   }
 
   //Checks going left
-  for (int row=6; row>0; row--)
+  for (int row=BOARD_ROWS; row>0; row--)
   {
     int counter = 0;
     for (int col=7; col>0; col--)
@@ -113,7 +119,7 @@ int three_in_row_horiz(Cell board[][8])
 }
 
 //Function that plays a turn for the computer
-void play_computer_turn(Cell board[][8], int player_number, int *row, int *col)
+void play_computer_turn(Cell board[][BOARD_COLS], int player_number, int *row, int *col)
 {
   int comp_col = 0;
   //Randomly selects a column
@@ -131,13 +137,13 @@ void play_computer_turn(Cell board[][8], int player_number, int *row, int *col)
   {
     do
     {
-      comp_col = rand() % 8 + 1;
+      comp_col = rand() % BOARD_COLS + 1;
     } while(!check_col(board, comp_col));
   }
   printf("COMPUTER CHOOSES %d\n", comp_col);
 
   //Simulates token drop on board
-  for (int i=6; i>=1; i--)//-1
+  for (int i=BOARD_ROWS; i>=1; i--)//-1
   {
     if (board[i][comp_col].token == '_')
     {
